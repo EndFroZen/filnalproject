@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website with Login and Registration Form | CodingNepal</title>
+    <!-- Google Fonts Link For Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="/css/menu.css">
+</head>
+<body>
+    <div class="form-container">
+        <div class="form-box name">
+            <img class="form-img" src="<%=items[0].imagePath%>" alt="">
+            <div class="form-product">
+                <h2><%=items[0].productName%></h2>
+                <form action="/input/<%=items[0].productID%>" method = "post" onsubmit="return validateForm()">
+                    <h4><%=items[0].kilogram%> kg.</h4>
+                    <h4><%=items[0].price%> Bath/kg.</h4>
+                    <div class="input-field">
+                        <input name="kiloneed" id="kiloneed" type="number">
+                        <label>จำนวนที่ต้องการ</label>
+                    </div>
+                    <button class="add" type="submit">Add To Cart</button>
+                    <a href="listproduct.html">
+                        <button class="back" type="button">
+                            <i class='bx bx-x'></i>
+                        </button>
+                    </a>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function validateForm() {
+            var kiloneed = parseFloat(document.getElementById("kiloneed").value);
+            var availableQuantity = parseFloat("<%=items[0].kilogram%>");
+            if (kiloneed > availableQuantity) {
+                alert("Quantity exceeds available stock!");
+                return false; // Prevent form submission
+            }
+            return true; // Allow form submission
+        }
+    </script>
+</body>
+</html>

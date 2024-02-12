@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADMIN</title>
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+    <h1>ADMIN</h1>
+    <form action="/admin/indata" method="post" enctype="multipart/form-data">
+        <input type="file" name="filename" id="file">
+        <select name="storeID">
+            <option value="NON">เลือกร้าน</option>
+            <option value="1">ทอฟันหมูสด</option>
+            <option value="2">Tesgo lotus</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+        </select>
+        <select name="typeID">
+            <option value="NON">เลือกประเภทอาหาร</option>
+            <option value="1">หมู</option>
+            <option value="2">เนื้อ</option>
+            <option value="3">ไก่</option>
+            <option value="4">ผัก</option>
+            <option value="5">อาหารทะเล</option>
+        </select>
+        <input type="text" name="productName" placeholder="ชื่อสินค้า">
+        <input type="number" name="kilogram" placeholder="จำนวน:กิโลกรัม">
+        <input type="number" name="price" placeholder="ราคา/กิโลกรัม">
+        <input type="submit" value="UPLOAD">
+    </form>
+    <main class="table" id="customers_table">
+        <section class="table__header">
+            <h1>Orders</h1>
+        </section>
+        <section class="table__body">
+            <table>
+                <thead>
+                    <tr>
+                        <th> Id </th>
+                        <th> IMAGE </th>
+                        <th> TYPE </th>
+                        <th> NAME </th>
+                        <th> Location </th>
+                        <th> Order Date </th>
+                        <th> KILOGRAM </th>
+                        <th> PRICE </th>
+                        <th>EDIT</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <%for(let i = items.length-1;i>=0;i--){%>
+                        <tr>
+                            <td><%=i+1%></td>
+                            <td><img src="<%= items[i].imagePath%>" alt=""></td>
+                            <td><%= items[i].typeName %></td>
+                            <td><%= items[i].productName %></td>
+                            <td><%= items[i].storeName%></td>
+                            <td><%= items[i].dateTime%></td>
+                            <td><%= items[i].kilogram%> KG.</td>
+                            <td><%= items[i].price%> BATH</td>
+                            <form action="/delete/<%=items[i].productID%><%=items[i].imagePath%>" method="post" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                                <td><button class="delete-button">Delete</button></td>
+                            </form>
+                            
+                        </tr>
+                    <%}%>
+                </tbody>
+            </table>
+        </section>
+    </main>
+</body>
+</html>
