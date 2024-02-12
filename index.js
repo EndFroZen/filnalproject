@@ -63,7 +63,7 @@ app.get("/home",(req,res)=>{
 })
 
 app.get("/admin",(req,res)=>{
-    const query = "SELECT * FROM products"
+    const query = "SELECT * FROM products INNER JOIN types ON products.typeID = types.typeID INNER JOIN stores ON products.storeID = stores.storeID "
     db.query(query,(err,data)=>{
         if(err) throw err
         res.render('admin',{items:data})
